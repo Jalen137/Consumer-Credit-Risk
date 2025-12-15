@@ -14,11 +14,11 @@ This analysis is framed around a mock medium-sized consumer lending company that
 
 ## Dataset
 
-### Where it comes from
+Where it comes from
 
-### What it represents
+What it represents
 
-### Why I chose it
+Why I chose it
 
 
 ## How I went about the project
