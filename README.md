@@ -15,6 +15,7 @@ This analysis is framed around a mock medium-sized consumer lending company that
 ## Dataset
 
 Where it comes from
+Got it from the UC Irvine Machine Learning Repository
 https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients
 
 What it represents
