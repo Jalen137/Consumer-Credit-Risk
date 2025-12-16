@@ -42,6 +42,7 @@ X18-X23: Amount of previous payment (NT dollar). X18 = amount paid in September,
 
 ## Decision Framework
 
+Applicants are segmented into Low, Medium, and High Risk bands based on predicted default probability percentiles. Approval decisions are driven by expected profit, with High Risk applicants rejected due to large expected losses, while Low and Medium Risk applicants are approved or reviewed.
 
 ## Evaluation Metrics
 
