@@ -68,6 +68,82 @@ Applicants are segmented into Low, Medium, and High Risk bands based on predicte
 
 These metrics were chosen because the goal of the project is decision-making, not just prediction accuracy.
 
+## Exploratory Data Analysis (EDA)
+
+Before modeling, exploratory data analysis was conducted in Python to understand target balance, feature behavior, and potential signal.
+
+Key EDA steps included:
+- Examining the default vs non-default distribution to assess class imbalance
+- Visualizing feature distributions for defaulters and non-defaulters
+- Reviewing correlations among numeric features to identify non-linear relationships
+- Inspecting the distribution of predicted default probabilities
+
+The default rate was approximately 22%, indicating moderate class imbalance and motivating the use of class-weighted models. Several financial behavior variables showed clear distributional differences between defaulters and non-defaulters. Correlation analysis suggested non-linear relationships, supporting the use of tree-based models such as XGBoost.
+
+EDA was used strictly to validate data quality and modeling direction. All business-facing decisions are driven by model outputs rather than raw feature exploration.
+
+---
+
+## Risk Segmentation and Profit Logic
+
+Rather than relying on a single probability cutoff, applicants were segmented into three risk bands based on percentiles of predicted default probability:
+
+- Low Risk: bottom 30%
+- Medium Risk: middle 40%
+- High Risk: top 30%
+
+This approach ensures stable group sizes and supports portfolio-level decision making.
+
+A simple profit framework was applied:
+- +$1,000 for a paid loan
+- −$5,000 for a defaulted loan
+
+Expected profit was calculated using default rates within each risk band rather than individual loan outcomes. This allows decisions to be evaluated at a policy level instead of on a single-loan basis.
+
+---
+
+## Excel Decision Dashboard
+
+An Excel dashboard was built to translate model outputs into business decisions. Excel is used only for decision-making and scenario analysis, not for modeling.
+
+The dashboard includes:
+- Policy assumption inputs (profit per paid loan, loss per default)
+- A risk band summary table with loan counts, default rates, and expected profit
+- Visualizations showing default rates, loan distribution, and expected profit by risk band
+- A written interpretation tying all charts to a clear credit policy
+
+All row-level calculations are handled in Python. Excel summarizes results at the portfolio level, mirroring how credit decisions are reviewed in real business settings.
+
+---
+
+## Business Interpretation
+
+Model results show clear separation between risk tiers. Default rates increase sharply from Low Risk to High Risk, while profitability declines substantially. Portfolio profit is driven almost entirely by Low Risk approvals, while High Risk loans generate large expected losses.
+
+Medium Risk loans are marginally profitable and represent a tradeoff between growth and risk, suggesting the need for additional controls such as manual review or tighter terms.
+
+These findings support a disciplined approval policy focused on risk-adjusted profitability rather than approval volume.
+
+---
+
+## Limitations and Next Steps
+
+This project uses a fixed profit and loss assumption and does not account for interest rates, loan size variation, or dynamic borrower behavior over time. The model is evaluated on historical data and assumes stable borrower patterns.
+
+Potential extensions include:
+- Sensitivity analysis on profit and loss assumptions
+- Alternative risk band thresholds
+- Incorporating loan size into profit calculations
+- Time-based validation or out-of-sample testing
+- Adding explainability techniques such as feature importance or SHAP values
+
+---
+
+## Conclusion
+
+This project demonstrates an end-to-end credit risk workflow, from data cleaning and exploratory analysis to predictive modeling and business decision-making. By combining Python-based modeling with an Excel decision dashboard, the analysis reflects how risk models are operationalized in practice rather than treated as standalone prediction exercises.
+
+
 ## Key Findings
 - The logistic regression model achieved a ROC-AUC of about 0.72 and provided a strong baseline.  
 - The XGBoost model improved performance with a ROC-AUC of about 0.78.  
